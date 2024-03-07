@@ -8,9 +8,11 @@ for c in clients:
     answer += 1
     if num <= 0:
         continue
-    while True:
-        num -= check[1]
-        answer +=1
-        if num <= 0:
-            break
+    
+    another = num // check[1]
+    remain = num % check[1]
+    
+    answer += another
+    if remain >0 :
+        answer += 1
 print(answer)
