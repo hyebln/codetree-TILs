@@ -7,7 +7,7 @@ for c in clients:
     num = c - check[0]
     answer += 1
     if num <= 0:
-        break
+        continue
     while True:
         num -= check[1]
         answer +=1
