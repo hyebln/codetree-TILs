@@ -1,3 +1,5 @@
+from  collections import deque
+
 n,m = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(n)]
 
@@ -22,21 +24,20 @@ def caldistance(selected):
         dist += minds
     ans = min(ans, dist)
 
-def select(si, num):
-    if num == m:
-        caldistance(selectedarr)
-        return
 
-    for i in range(si, len(hospital)):
+def select(arr, n):
+    if n == m:
+        caldistance(arr)
+        return
+    for i in range(n,len(hospital)):
         if not visited[i]:
-            selectedarr.append(hospital[i])
             visited[i] = 1
-            select(i+1, num+1)
+            arr.append(hospital[i])
+            select(arr, n+1)
+            arr.pop()
             visited[i] = 0
-            selectedarr.pop()
 
 ans = 10e9
 visited = [0]*len(hospital)
-selectedarr = []
-select(0, 0)
+select([], 0)
 print(ans)
