@@ -27,7 +27,7 @@ def seperatevirus():
                 ni = vi + dx[d]
                 nj = vj + dy[d]
                 if 0<=ni<n and 0<=nj<n:
-                    virus.append([ni,nj,1])
+                    virus.append([ni+1,nj+1,1])
 
 
 
