@@ -10,16 +10,18 @@ dy = [1,0,-1,0]
 def seperateEgg():
     visited = [[0]*n for _ in range(n)]
     visited[0][0] = 1
-    group = 1
+    groupidx = 1
     groupdic = defaultdict(list)
     for i in range(n):
         for j in range(n):
             num = eggs[i][j]
             if visited[i][j] == 0:
-                group += 1
-                visited[i][j] = group
+                groupidx += 1
+                visited[i][j] = groupidx
+                groupid = groupidx
+
             else:
-                group = visited[i][j]
+                groupid = visited[i][j]
 
             for d in range(2):
                 ni = i + dx[d]
@@ -27,14 +29,16 @@ def seperateEgg():
                 if 0<=ni<n and 0<=nj<n:
                     besides = eggs[ni][nj]
                     if L<=abs(besides-num)<=R:
-                        visited[ni][nj] = group
-            groupdic[group].append(num)
+                        visited[ni][nj] = groupid
+            groupdic[groupid].append(num)
+
 
     if visited[-1][-1] == n**2:
         return []
     for idx, egg in groupdic.items():
         avg = sum(egg) // len(egg)
         groupdic[idx] = avg
+
 
     for i in range(n):
         for j in range(n):
