@@ -3,13 +3,15 @@ board = [list(map(int, input().split())) for _ in range(n)]
 rotate_list= [list(map(int,input().split())) for _ in range(q)]
 
 
-def boardRotate(i,d,k):
-    turnlist = board[i]
-    if d == 0: # 시계
-        turned = turnlist[-k:]+turnlist[:-k]
-    if d == 1: # 반시계
-        turned = turnlist[k:]+turnlist[:k]
-    board[i] = turned[:]
+def boardRotate(x,d,k):
+    for i in range(n):
+        if (i+1) %x == 0:
+            turnlist = board[i]
+            if d == 0: # 시계
+                turned = turnlist[-k:]+turnlist[:-k]
+            if d == 1: # 반시계
+                turned = turnlist[k:]+turnlist[:k]
+            board[i] = turned[:]
 
 def checkBoard():
     dx = [0,0,-1,1]
@@ -28,7 +30,6 @@ def checkBoard():
                     if ni<0 or ni>=n:
                         continue
                 if board[ni][nj] == board[i][j]:
-
                     deletenum = True
                     visited[i][j] = 1
                     visited[ni][nj] = 1
@@ -64,6 +65,6 @@ def answer():
     print(ans)
     
 for x,d,k in rotate_list:
-    boardRotate(x-1,d,k)
+    boardRotate(x,d,k)
     checkBoard()
 answer()
