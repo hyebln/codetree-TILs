@@ -46,13 +46,12 @@ def setHospital(hos):
                 q.append([nx,ny])
 
     for i,j in hospital:
-        board[i][j] = -3
+        newboard[i][j] = -3
 
     maxd = 0
     for i in range(n):
         for j in range(n):
             if newboard[i][j] == 0:
-                fail = False
                 return
             if newboard[i][j] > 0:
                 if maxd < newboard[i][j]:
@@ -67,13 +66,11 @@ def setHospital(hos):
     ans = min(ans, maxd)
 
 hospital_sel = []
-fail= True
 dfs(hospital, [], 0)
-
 for sel in hospital_sel:
     setHospital(sel)
 
-if fail:
-    print(ans)
-else:
+if ans == 10e9:
     print(-1)
+else:
+    print(ans)
