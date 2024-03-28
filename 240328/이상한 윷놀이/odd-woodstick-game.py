@@ -63,7 +63,9 @@ def moveBlue(idx):
 turn =0
 stack4 = False
 while True:
-    if stack4 or turn > 100:
+    if stack4:
+        break
+    if turn > 100:
         turn = -1
         break
     for idx in range(k):
