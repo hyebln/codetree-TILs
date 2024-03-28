@@ -65,7 +65,7 @@ stack4 = False
 while True:
     if stack4:
         break
-    if turn > 100:
+    if turn > 1000:
         turn = -1
         break
     for idx in range(k):
