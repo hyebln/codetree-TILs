@@ -27,12 +27,10 @@ def moveThief():
                         nj = j + dy[d]
                         if 0<=ni<4 and 0<=nj<4 and board[ni][nj] != -1:
                             break
+                        if turn > 8:
+                            break
                         d = (d+1)%8
                         turn += 1
-                        if turn ==8:
-                            break
-                    if turn == 8:
-                        continue
                     changethief = board[ni][nj][:]
                     board[ni][nj] = [idx,d]
                     board[i][j] = changethief
