@@ -60,7 +60,7 @@ def moveCatcher(c, score):
         return
     for dist in range(1, 4):
         ti = ci+dx[cd]*dist
-        tj = ci+dy[cd]*dist
+        tj = cj+dy[cd]*dist
         if 0<=ti<4 and 0<=tj<4:
             if board[ti][tj] in [[], -1]:
                 continue
