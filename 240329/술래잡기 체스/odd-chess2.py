@@ -44,7 +44,7 @@ def done(ci, cj, cd):
     done = True
     for dist in range(1, 4):
         ti = ci+dx[cd]*dist
-        tj = ci+dy[cd]*dist
+        tj = cj+dy[cd]*dist
         if 0<=ti<4 and 0<=tj<4 and board[ti][tj] != [] and board[ti][tj] != -1 :
             done = False
     return done
