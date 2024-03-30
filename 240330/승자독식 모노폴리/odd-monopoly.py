@@ -24,7 +24,7 @@ for i in range(n):
 def movePlayer():
     newboard = [[[]for _ in range(n)] for i in range(n)]
 
-    for idx in range(4):
+    for idx in range(m):
         if player[idx] == []:
             continue
         pi,pj,pd = player[idx]
