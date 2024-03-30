@@ -61,6 +61,8 @@ def moveTaxi(idx):
                     stop = True
                 q.append([ni,nj])
     needed = visited[ei][ej]-1
+    if needed == -1:
+        return True
     if c < needed:
         return True
     c += needed
