@@ -69,7 +69,10 @@ def calgroup():
                             groupdict[group] += 1
                             q.append([nx,ny])
                 group += 1
-    return max(groupdict.values())
+    if len(groupdict.values())>0:
+        return max(groupdict.values())
+    else:
+        return 0
 
 for rlevel in rotatelevel:
     if rlevel != 0:
