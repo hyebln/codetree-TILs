@@ -18,7 +18,7 @@ def groupbomb():
             q.append([i,j])
             visited[i][j] = 1
             group = [[i,j]]
-            groupinfo = [0, 0, 0] #red,행,열
+            groupinfo = [0, i,j] #red,행,열
             color = board[i][j]
             while q:
                 x,y = q.popleft()
