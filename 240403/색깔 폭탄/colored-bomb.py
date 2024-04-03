@@ -19,9 +19,9 @@ def groupbomb():
             visited[i][j] = 1
             group = [[i,j]]
             groupinfo = [0, 0, 0] #red,행,열
+            color = board[i][j]
             while q:
                 x,y = q.popleft()
-                color = board[x][y]
                 for d in range(4):
                     nx, ny = x +dx[d], y+dy[d]
                     if 0<=nx<n and 0<=ny<n and board[nx][ny] in [0, color] and [nx,ny] not in group:
