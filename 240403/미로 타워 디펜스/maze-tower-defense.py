@@ -47,7 +47,7 @@ def moveM():
                 cnt = 1
 
         if cnt >= 4:
-            deleteidx.extend([i for i in range(idx-cnt, idx)])
+            deleteidx.extend([i for i in range(idx-cnt+1, idx+1)])
         if deleteidx == []:
             break
         for idx in deleteidx[::-1]:
