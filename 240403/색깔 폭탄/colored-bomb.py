@@ -24,7 +24,7 @@ def groupbomb():
                 color = board[x][y]
                 for d in range(4):
                     nx, ny = x +dx[d], y+dy[d]
-                    if 0<=nx<n and 0<=ny<n and board[nx][ny] in [0, color] and not visited[nx][ny]:
+                    if 0<=nx<n and 0<=ny<n and board[nx][ny] in [0, color] and [nx,ny] not in group:
                         q.append([nx,ny])
                         group.append([nx,ny])
                         if board[nx][ny] == 0:
