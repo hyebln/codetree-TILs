@@ -15,7 +15,7 @@ def rollFlour():
         l = len(board[0])
         if len(board) > len(board[-1]) - l:
             break
-        newboard = [board[1][l:]]
+        newboard = [board[-1][l:]]
         splited = []
         for i in range(len(board)):
             splitt = []
@@ -25,9 +25,6 @@ def rollFlour():
         turnsplited = list(map(list, zip(*splited[::-1])))
         turnsplited.extend(newboard)
         board=turnsplited[:]
-        if l > 2:
-            break
-
     return board
 
 def pushFlour():
@@ -54,7 +51,6 @@ def pushFlour():
         for i in range(len(origin), -1, -1):
             if 0 <= i < len(origin) and 0 <= j < len(origin[i]):
                 newflour.append(origin[i][j])
-
     return newflour
 
 def foldFlour():
@@ -67,6 +63,7 @@ def foldFlour():
     newflour[i][lenf//4:]
     for i in range(2):
         finalf.append([a for a in newflour[i][lenf//4:]])
+
     return finalf
 
 
