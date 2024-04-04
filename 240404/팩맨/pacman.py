@@ -25,7 +25,7 @@ def moveMonster(monsterboard):
                     md = md_
                     while True:
                         ni, nj = i + dx[md], j + dy[md]
-                        if ni<0 or ni >=4 or nj<0 or nj>=4 or len(deadboard[ni][nj]) > 0 or [ni,nj] == [pi,pj]:
+                        if ni<0 or ni >=4 or nj<0 or nj>=4 or deadboard[ni][nj] != [] or [ni,nj] == [pi,pj]:
                             md = (md+1)%9
                             if md == 0:
                                 md += 1
@@ -41,9 +41,9 @@ def moveMonster(monsterboard):
 
 def movePackman(board):
     global pi, pj
-    dx = [-1, 0, 1, 0] #상좌하우
-    dy = [0, -1, 0, 1]
-    maxeat = [0,[]] #cnt,route
+    ddx = [-1, 0, 1, 0] #상좌하우
+    ddy = [0, -1, 0, 1]
+    maxeat = [-1,[]] #cnt,route
     for d1 in range(4):
         for d2 in range(4):
             for d3 in range(4):
@@ -52,14 +52,17 @@ def movePackman(board):
                 visited = [[0]*4 for _ in range(4)]
                 skip = False
                 for dd in [d1, d2,d3]:
-                    ni += dx[dd]
-                    nj += dy[dd]
-                    if ni<0 or ni>=4 or nj<0 or nj>=4 or visited[ni][nj]:
+                    ni += ddx[dd]
+                    nj += ddy[dd]
+                    if ni<0 or ni>=4 or nj<0 or nj>=4:
                         skip = True
                         continue
-                    visited[ni][nj] = 1
-                    eatable[0] += sum([i for i in board[ni][nj].values()])
-                    eatable[1].append([ni,nj])
+                    if not visited[ni][nj]:
+                        visited[ni][nj] = 1
+                        eatable[0] += sum([i for i in board[ni][nj].values()])
+                        eatable[1].append([ni,nj])
+                    else:
+                        eatable[1].append([ni,nj])
                 if skip:
                     continue
                 if maxeat[0] < eatable[0]:
@@ -69,8 +72,7 @@ def movePackman(board):
         if len(board[mi][mj]) == 0:
             continue
         board[mi][mj] = defaultdict(int)
-        if -3 not in deadboard[mi][mj]:
-            deadboard[mi][mj].append(-3)
+        deadboard[mi][mj] = -3
 
     pi,pj = maxeat[1][2]
 
@@ -88,10 +90,11 @@ for turn in range(t):
     monsterboard = new[:]
     for i in range(4):
         for j in range(4):
-            for idx in range(len(deadboard[i][j])):
-                deadboard[i][j][idx] += 1
-                if deadboard[i][j][idx] == 0:
-                    deadboard[i][j].pop(idx)
+            if deadboard[i][j] == []:
+                continue
+            deadboard[i][j] += 1
+            if deadboard[i][j] == 0:
+                deadboard[i][j]=[]
 
 
 ans = 0
