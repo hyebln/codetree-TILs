@@ -87,4 +87,4 @@ ans = 0
 for turn in range(k):
     runboard = moveRunner()
     ci, cj= moveCatcher(turn, ci, cj)
-    print(ans)
+print(ans)
