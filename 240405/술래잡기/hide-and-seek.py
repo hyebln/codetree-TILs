@@ -4,7 +4,6 @@ tree = [list(map(int,input().split())) for _ in range(h)]
 runboard = [[[] for i in range(n)] for _ in range(n)]
 treeboard = [[0]*n for _ in range(n)]
 ci, cj, cd = n//2, n//2, 3
-
 dx = [0, 1, 0, -1] #우 하 좌 상
 dy = [1, 0, -1, 0]
 for run in runner:
@@ -14,6 +13,7 @@ for run in runner:
 for t in tree:
     x,y = t
     treeboard[x-1][y-1] = 1
+
 
 clockwise = [[0] * n for _ in range(n)]
 counterclockwise = [[0] * n for _ in range(n)]
@@ -46,6 +46,7 @@ def moveRunner():
                         ni,nj = i+dx[dir], j +dy[dir]
                         if 0<=ni<n and 0<=nj<n:
                             if [ni,nj] == [ci, cj]:
+                                newboard[i][j].append(dir)
                                 continue
                             else:
                                 newboard[ni][nj].append(dir)
@@ -54,12 +55,15 @@ def moveRunner():
                             ni, nj = i + dx[dir], j + dy[dir]
                             if [ni,nj] != [ci, cj]:
                                 newboard[ni][nj].append(dir)
-
+                            else:
+                                newboard[i][j].append(dir)
+                    else:
+                        newboard[i][j].append(dir)
     return newboard
 
 def moveCatcher(t, ci, cj):
     global ans
-    if (t // ((n**2)//2))%2 == 0 :
+    if ((t+1) // (n**2))%2 == 0 :
         cd = clockwise[ci][cj]
         ni, nj = ci+dx[cd], cj+dy[cd]
         view = clockwise[ni][nj]
