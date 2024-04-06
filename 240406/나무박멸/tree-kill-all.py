@@ -57,7 +57,8 @@ def startDead():
                     maxdead = deadcnt
                     maxlist = deadlist
 
-
+    if maxdead == -1:
+        return
     for di, dj in maxlist:
         board[di][dj] = 0
         deadboard[di][dj] = c+1
