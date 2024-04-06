@@ -27,12 +27,14 @@ def movePlayer():
         if nx<0 or nx>=n or ny<0 or ny>=n:
             pd = (pd+2)%4
             nx,ny = px+dx[pd], py+dy[pd]
+
         if playerboard[nx][ny] >0:
             idx2 = playerboard[nx][ny]
             playerboard[px][py] = 0
+            players[idx] = [nx,ny, pd,ps,pg]
             fightPlayer(nx, ny, idx, idx2)
 
-        if playerboard[nx][ny] == 0:
+        elif playerboard[nx][ny] == 0:
             if gunboard[nx][ny] != []:
                 gunboard[nx][ny].sort()
                 maxg = gunboard[nx][ny].pop(-1)
@@ -49,7 +51,6 @@ def movePlayer():
                 playerboard[nx][ny] = idx
                 playerboard[px][py] = 0
                 players[idx] = [nx,ny,pd,ps,pg]
-
 
 def fightPlayer(x,y,p1,p2):
     x1,y1,d1,s1,g1 = players[p1]
@@ -88,7 +89,6 @@ def Loser(x,y,pidx):
         gunboard[x][y].append(g)
     while True:
         nx, ny = x+dx[d], y+dy[d]
-
         if 0<=nx<n and 0<=ny<n and playerboard[nx][ny] == 0:
             break
         d = (d+1)%4
@@ -105,5 +105,4 @@ def Loser(x,y,pidx):
 
 for round in range(k):
     movePlayer()
-    
 print(*list(point.values()))
