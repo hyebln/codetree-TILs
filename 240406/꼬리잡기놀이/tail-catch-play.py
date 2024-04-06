@@ -25,7 +25,7 @@ def initState():
                                 team.append([nx,ny])
                                 visited[nx][ny] = 1
                                 q.append([nx,ny])
-                            if board[nx][ny] == 3:
+                            if board[x][y] == 2 and board[nx][ny] == 3:
                                 team.append([nx,ny])
                 teams.append(team)
 
