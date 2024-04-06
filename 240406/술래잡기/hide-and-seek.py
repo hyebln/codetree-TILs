@@ -80,7 +80,7 @@ def moveCatcher(clock, i,j):
     vi, vj = ni, nj
 
     catch = 0
-    for _ in range():
+    for _ in range(3):
         vi = ni + dx[viewd]*_
         vj = nj + dy[viewd]*_
         if vi<0 or vi>=n or vj<0 or vj>=n:
