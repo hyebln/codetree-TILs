@@ -25,13 +25,8 @@ def selectAtk(now):
                     ti, tj, tp, tt = i, j, board[i][j], atkboard[i][j]
 
     atkResult = lazerAtk([si,sj], [ti,tj])
-    if atkResult != []:
-        atkResult= atkResult
-
-    else:
+    if atkResult == []:
         atkResult = bombAtk([si,sj], [ti,tj])
-
-    atkboard[si][sj] = now
 
     for i in range(n):
         for j in range(m):
@@ -39,33 +34,40 @@ def selectAtk(now):
                 board[i][j] = 0
             if board[i][j] != 0 and not atkResult[i][j]:
                 board[i][j] += 1
+                
 
 
 def lazerAtk(atk, tar):
     ai, aj = atk
     ti, tj = tar
     q= deque()
-    q.append([ai,aj])
+    q.append([ti,tj])
     visited = [[0]*m for _ in range(n)]
-    visited[ai][aj] = 'start'
+    visited[ti][tj] = 1
     while q:
         x,y = q.popleft()
         for d in range(4):
             nx,ny = (x+dx[d])%n, (y+dy[d])%m
             if visited[nx][ny] ==0 and board[nx][ny] !=0:
-                visited[nx][ny] = [x,y]
+                visited[nx][ny] = visited[x][y]+1
                 q.append([nx,ny])
 
-    if visited[ti][tj] == 0:
+    if visited[ai][aj] == 0:
         return []
 
-    rt = [ti, tj]
+    i,j = ai, aj
     attacked = [[0]*m for _ in range(n)]
     while True:
-        rt = visited[rt[0]][rt[1]]
-        if rt == [ai, aj]:
+        for d in range(4):
+            ni = (i+dx[d])%n
+            nj = (j+dy[d])%m
+            if visited[ni][nj] == visited[i][j] -1:
+                i, j = ni, nj
+                break
+        if [i,j] == [ti, tj]:
             break
-        attacked[rt[0]][rt[1]] = 1
+        attacked[i][j] = 1
+
 
     board[ti][tj] -= board[ai][aj]
     for x in range(n):
@@ -105,7 +107,6 @@ for turn in range(1,k+1):
         dead += board[i].count(0)
     if dead == (n*m)-1:
         break
-
 ans = 0
 for i in range(n):
     ans = max(ans, max(board[i]))
