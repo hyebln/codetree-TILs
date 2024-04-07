@@ -22,7 +22,7 @@ def selectAtk(now):
         for j in range(m):
             if board[i][j] > 0 and [i,j] != [si,sj]:
                 if (tp, -tt, -(ti+tj), -tj) < (board[i][j], -atkboard[i][j], -(i+j), -j):
-                    ti, tj, tp = i, j, board[i][j]
+                    ti, tj, tp, tt = i, j, board[i][j], atkboard[i][j]
 
     atkResult = lazerAtk([si,sj], [ti,tj])
     if atkResult != []:
