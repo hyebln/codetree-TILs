@@ -26,7 +26,8 @@ def selectAtk(now):
 
     atkResult = lazerAtk([si,sj], [ti,tj])
     if atkResult != []:
-        atkResult=atkResult
+        atkResult= atkResult
+
     else:
         atkResult = bombAtk([si,sj], [ti,tj])
 
@@ -34,6 +35,8 @@ def selectAtk(now):
 
     for i in range(n):
         for j in range(m):
+            if board[i][j] <0:
+                board[i][j] = 0
             if board[i][j] != 0 and not atkResult[i][j]:
                 board[i][j] += 1
 
@@ -97,6 +100,11 @@ def bombAtk(atk, tar):
 
 for turn in range(1,k+1):
     selectAtk(turn)
+    dead = 0
+    for i in range(n):
+        dead += board[i].count(0)
+    if dead == (n*m)-1:
+        break
 
 ans = 0
 for i in range(n):
