@@ -36,6 +36,8 @@ def findSquare():
     length = 2
     personboard = [[0]*n for _ in range(n)]
     for i,j in person:
+        if [i,j] == [-1,-1]:
+            continue
         personboard[i][j] = 1
     search = True
     while search:
