@@ -31,6 +31,7 @@ def movePerson():
                     personmove[idx] += 1
                     break
 
+
 def findSquare():
     length = 2
     personboard = [[0]*n for _ in range(n)]
@@ -54,7 +55,6 @@ def findSquare():
                     break
             if not search:
                 break
-
         length += 1
     return selected
 
@@ -66,12 +66,22 @@ def rotateSquare(sq):
             newboard[i][j] = board[si+i][sj+j]
             if [si+i, sj+j] == exit:
                 newboard[i][j] = -1
-            if [si+i, sj+j] in person:
-                pidx = person.index([si+i, sj+j])
-                newboard[i][j] = pidx*10
+            for pidx, [pi, pj] in enumerate(person):
+                if [pi,pj] == [si+i, sj+j]:
+                    if newboard[i][j] == 0:
+                        newboard[i][j] = [pidx*10]
+                    else:
+                        newboard[i][j].append(pidx*10)
+
     newboard_ = list(map(list, zip(*newboard[::-1])))
     for i in range(sl):
         for j in range(sl):
+            if type(newboard_[i][j]) == list:
+                for idx in newboard_[i][j]:
+                    pidx = idx // 10
+                    person[pidx] = [si+i, sj+j]
+                    board[si+i][sj+j] = 0
+                continue
             if newboard_[i][j] == 0:
                 board[si+i][sj+j] = newboard_[i][j]
             elif newboard_[i][j] == -1:
@@ -79,10 +89,7 @@ def rotateSquare(sq):
                 exit[0], exit[1] = si+i, sj+j
             elif 0<newboard_[i][j]<10:
                 board[si+i][sj+j] = newboard_[i][j] -1
-            elif newboard_[i][j] >=10:
-                pidx = newboard_[i][j]//10
-                person[pidx] = [si+i, sj+j]
-                board[si+i][sj+j] = 0
+                
 
 for time in range(k):
     movePerson()
