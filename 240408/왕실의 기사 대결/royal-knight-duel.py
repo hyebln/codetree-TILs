@@ -70,6 +70,8 @@ def getDamage(movedboard, org):
 ans = 0
 for turn in range(q):
     move = movelist[turn]
+    if person[move[0]] == []:
+        continue
     moveKnight(move)
 
     
