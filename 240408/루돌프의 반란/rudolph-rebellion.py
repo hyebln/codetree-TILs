@@ -60,6 +60,7 @@ def moveSanta():
         si_, sj_ = si+dx[move_d], sj+dy[move_d]
         if [si_, sj_] == ludolph:
             score[idx] += D
+            santa[idx] = [si_, sj_]
             crushSanta(si_, sj_, move_d, idx)
 
         else:
