@@ -113,7 +113,6 @@ def crushSanta(i,j,d, sidx):
             si += dx[d]
             sj += dy[d]
             org_idx = newidx
-            print(si, sj)
             if si<0 or si>=n or sj<0 or sj>=n:
                 break
             if [si,sj] not in santa:
