@@ -34,6 +34,8 @@ def moveKnight(m):
             for dj in range(w):
                 i_, j_ = i+di, j+dj
                 ni,nj = i_+dx[md], j_+dy[md]
+                if ni<0 or ni>=l or nj<0 or nj>=l:
+                    return
                 moved[ni][nj] = midx
                 if knightboard[ni][nj] != midx and knightboard[ni][nj] > 0:
                     moveidx.add(knightboard[ni][nj])
