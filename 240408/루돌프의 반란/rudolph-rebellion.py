@@ -86,6 +86,7 @@ def crushLudolph(i,j,d,sidx):
             sj += dy[d]
             org_idx = newidx
             if si<0 or si>=n or sj<0 or sj>=n:
+                santa[org_idx] = []
                 break
             if [si,sj] not in santa:
                 santa[org_idx] = [si,sj]
@@ -115,6 +116,7 @@ def crushSanta(i,j,d, sidx):
             sj += dy[d]
             org_idx = newidx
             if si<0 or si>=n or sj<0 or sj>=n:
+                santa[org_idx] = []
                 break
             if [si,sj] not in santa:
                 santa[org_idx] = [si,sj]
