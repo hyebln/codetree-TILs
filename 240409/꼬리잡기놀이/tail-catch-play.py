@@ -24,6 +24,7 @@ for i in range(n):
                     break
             teams.append(line)
 
+
 def moveTeam():
     for idx,team in enumerate(teams):
         si, sj = team[0]
@@ -31,7 +32,7 @@ def moveTeam():
         ei_, ej_ = team[-1]
         for d in range(4):
             si_, sj_ = si+dx[d], sj+dy[d]
-            if 0<=si_<n and 0<=sj_<n and 3<=board[si_][sj_]<=4 and [si_,sj_] != team[1]:
+            if 0<=si_<n and 0<=sj_<n and board[si_][sj_] in [3,4] and [si_,sj_] != team[1]:
                 break
         team.insert(0, [si_,sj_])
         board[si][sj] = 2
@@ -53,7 +54,7 @@ def throwBall(round):
                     if [hx,hy] in team:
                         pidx = team.index([hx,hy])
                         ans += (pidx+1)**2
-                        teams[tidx] = team[::-1]
+                        changeHeadTail(tidx)
                         hit = True
                         break
                 if hit:
@@ -67,7 +68,7 @@ def throwBall(round):
                     if [hx,hy] in team:
                         pidx = team.index([hx,hy])
                         ans += (pidx+1)**2
-                        teams[tidx] = team[::-1]
+                        changeHeadTail(tidx)
                         hit = True
                         break
                 if hit:
@@ -81,7 +82,7 @@ def throwBall(round):
                     if [hx,hy] in team:
                         pidx = team.index([hx,hy])
                         ans += (pidx+1)**2
-                        teams[tidx] = team[::-1]
+                        changeHeadTail(tidx)
                         hit = True
                         break
                 if hit:
@@ -95,13 +96,18 @@ def throwBall(round):
                     if [hx,hy] in team:
                         pidx = team.index([hx,hy])
                         ans += (pidx+1)**2
-                        teams[tidx] = team[::-1]
+                        changeHeadTail(tidx)
                         hit = True
                         break
                 if hit:
                     break
 
-
+def changeHeadTail(tidx):
+    team = teams[tidx]
+    hi, hj = team[0]
+    ti, tj = team[-1]
+    board[hi][hj], board[ti][tj] = board[ti][tj], board[hi][hj]
+    teams[tidx] = team[::-1]
 
 ans = 0
 for round in range(k):
