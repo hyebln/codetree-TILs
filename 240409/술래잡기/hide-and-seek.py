@@ -47,6 +47,7 @@ def moveRunner():
         for j in range(n):
             dist = abs(ci-i)+abs(cj-j)
             if dist > 3:
+                newboard[i][j] += runners[i][j]
                 continue
             if runners[i][j] != []:
                 for d in runners[i][j]:
