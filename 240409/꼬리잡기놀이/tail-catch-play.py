@@ -31,7 +31,7 @@ def moveTeam():
         ei_, ej_ = team[-1]
         for d in range(4):
             si_, sj_ = si+dx[d], sj+dy[d]
-            if 0<=si_<n and 0<=sj_<n and board[si_][sj_] == 4 and [si_,sj_] != team[1]:
+            if 0<=si_<n and 0<=sj_<n and 3<=board[si_][sj_]<=4 and [si_,sj_] != team[1]:
                 break
         team.insert(0, [si_,sj_])
         board[si][sj] = 2
