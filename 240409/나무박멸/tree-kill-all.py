@@ -53,6 +53,8 @@ def deadTree():
                     maxdead = deadcnt[i][j]
                     select = [i,j]
 
+    if select == [-1,-1]:
+        return
     si, sj = select
     ans += board[si][sj]
     board[si][sj] = 0
