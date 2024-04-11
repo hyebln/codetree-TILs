@@ -93,7 +93,7 @@ for turn in range(1, k+1):
     cnt = 0
     for i in range(n):
         cnt += board[i].count(0)
-    if cnt >= (n**2) -1:
+    if cnt >= (n*m) -1:
         break
         
 ans = 0
