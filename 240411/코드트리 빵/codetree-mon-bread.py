@@ -53,7 +53,7 @@ def movePerson():
         next = [10e9, -1,-1]
         for d in range(4):
             ni, nj = pi+dx[d], pj+dy[d]
-            if 0<=ni<n and 0<=nj<n and next[0] > visited[ni][nj] and board[ni][nj] != -1:
+            if 0<=ni<n and 0<=nj<n and 0< visited[ni][nj]<next[0] and board[ni][nj] != -1:
                 next = [visited[ni][nj], ni, nj]
 
         if [next[1], next[2]] == [ci,cj]:
