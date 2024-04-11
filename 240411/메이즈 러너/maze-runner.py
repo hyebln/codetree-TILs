@@ -14,6 +14,7 @@ move = [0]*(m+1)
 dx = [-1,1,0,0]
 dy = [0,0,1,-1]
 def movePeople():
+    global ans
     ei, ej = exit
     for idx in range(m+1):
         if people[idx]:
@@ -36,15 +37,20 @@ def movePeople():
                 people[idx] = next[:2]
                 move[idx] += 1
                 
+
 def rotateBoard():
     ei, ej = exit
     orgboard = copy.deepcopy(board)
     orgboard[ei][ej] = -1
+    
     for idx in range(m+1):
         if people[idx]:
             i,j = people[idx]
-            orgboard[i][j] = -10*idx
-            
+            if orgboard[i][j] == 0:
+                orgboard[i][j] = [-10*idx]
+            else:
+                orgboard[i][j].append(-10*idx)
+                
     dist = 2
     select = [10e9,10e9,10e9]
     while dist <=n:
@@ -54,41 +60,40 @@ def rotateBoard():
                 personcnt = 0
                 for dx in range(dist):
                     for dy in range(dist):
-                        if orgboard[i+dx][j+dy] == -1:
-                            exitcnt += 1
-                        if orgboard[i+dx][j+dy] < -1:
+                        if type(orgboard[i+dx][j+dy]) == list:
                             personcnt += 1
+                        elif orgboard[i+dx][j+dy] == -1:
+                            exitcnt += 1
                 if exitcnt and personcnt:
                     if (select[2], select[0], select[1]) > (dist,i,j):
                         select = [i,j,dist]
         dist += 1
-
+        
     si, sj, sdist = select
     small = []
     for i in range(si,si+sdist):
         line = orgboard[i]
         small.append(line[sj:sj+sdist])
     small_ = list(map(list, zip(*small[::-1])))
+    rotatedBoard = copy.deepcopy(board)
     for i in range(sdist):
         for j in range(sdist):
-            if small_[i][j] <= 0:
-                orgboard[i+si][j+sj] = small_[i][j]
-            else:
-                orgboard[i+si][j+sj] = small_[i][j] -1
-
-    for i in range(n):
-        for j in range(n):
-            if orgboard[i][j] < -1:
-                idx = abs(orgboard[i][j] // 10)
-                people[idx] = [i,j]
-                orgboard[i][j] = 0
-            if orgboard[i][j] == -1:
-                exit[0], exit[1] = i,j
-                orgboard[i][j] = 0
-    return orgboard
+            rotatedBoard[i+si][j+sj] = 0
+            if type(small_[i][j]) == list:
+                for pidx in small_[i][j]:
+                    idx = abs(pidx//10)
+                    people[idx] = [i+si, j+sj]
+            elif small_[i][j] == -1:
+                exit[0], exit[1] = i+si,j+sj
+            elif small_[i][j]>0:
+                rotatedBoard[i+si][j+sj] = small_[i][j] -1
+                
+    return rotatedBoard
 
 for time in range(1, k+1):
     movePeople()
+    if people.count([]) == m+1:
+        break
     board =rotateBoard()
     
 print(sum(move))
