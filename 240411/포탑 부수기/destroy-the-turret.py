@@ -82,7 +82,7 @@ def bombAttack(atk, tar):
     board[ti][tj] -= value
     for d in range(8):
         ni,nj = (ti+dx[d])%n, (tj+dy[d])%m
-        if board[ni][nj]:
+        if board[ni][nj] and [ni,nj] != [ai,aj]:
             attacked[ni][nj] = 1
             board[ni][nj] -= (value//2)
     return attacked
