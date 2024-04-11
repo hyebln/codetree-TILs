@@ -64,6 +64,8 @@ def Attack(attacker, target):
 
     for i in range(n):
         for j in range(m):
+            if board[i][j] <0:
+                board[i][j] = 0
             if attacked[i][j] == 0 and board[i][j]:
                 board[i][j] += 1
 
