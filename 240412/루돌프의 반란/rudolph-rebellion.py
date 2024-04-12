@@ -40,7 +40,7 @@ def moveLudolph():
     if nextludolph[:2] in santalist:
         sidx = santalist.index(nextludolph[:2])
         score[sidx] += C
-        stun[sidx] += 2
+        stun[sidx] = 2
 
         lx, ly, ld = nextludolph
         nx, ny = lx+dx[ld]*C, ly+dy[ld]*C
