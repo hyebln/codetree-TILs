@@ -83,6 +83,9 @@ def moveSanta():
                 santalist[idx] = []
             else:
                 if [nx_,ny_] in santalist:
+                    if santalist.index([nx_,ny_]) == idx:
+                        santalist[idx] = [nx_, ny_]
+                        continue
                     interaction(idx, nd, [nx_,ny_])
                 else:
                     santalist[idx] = [nx_,ny_]
