@@ -105,11 +105,13 @@ def interaction(newidx, d, sloc):
         nx, ny = x+dx[d], y+dy[d]
         if nx<0 or nx>=n or ny<0 or ny>=n:
             break
-        x, y = nx, ny
-        movelist.append([nx, ny])
         if [nx,ny] in santalist:
             moveidx.append(santalist.index([nx,ny]))
-            
+        else:
+            movelist.append([nx,ny])
+            break
+        x, y = nx, ny
+        movelist.append([nx, ny])
     for i in range(len(moveidx)):
         idx = moveidx[i]
         if i < len(movelist):
