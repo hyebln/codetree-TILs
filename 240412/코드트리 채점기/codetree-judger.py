@@ -67,9 +67,13 @@ for query in queries:
             stanbyurl.setdefault(t, u)
     if qtype == '300':
         t = int(content[0])
+        if list(calcul.values()).count([]) == 0:
+            continue
         stanby = startCalcul(t)
     if qtype == '400':
         t, jid = int(content[0]), int(content[1])
+        if calcul[jid] == []:
+            continue
         endCalcul(t, jid)
 
     if qtype == '500':
