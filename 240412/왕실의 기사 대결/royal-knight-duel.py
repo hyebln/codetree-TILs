@@ -75,6 +75,8 @@ def moveKnight(idx,d):
 
 for query in queries:
     idx, d = query
+    if knight[idx] == []:
+        continue
     moveKnight(idx,d)
 
 ans = 0
