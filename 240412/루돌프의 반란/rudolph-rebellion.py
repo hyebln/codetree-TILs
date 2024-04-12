@@ -79,7 +79,7 @@ def moveSanta():
             nx, ny, nd = nextsanta
             nd = (nd+2)%4
             nx_, ny_ = nx+dx[nd]*D, ny+dy[nd]*D
-            if nx_<0 or nx_ >=n or ny_<0 or ny>=n:
+            if nx_<0 or nx_ >=n or ny_<0 or ny_>=n:
                 santalist[idx] = []
             else:
                 if [nx_,ny_] in santalist:
