@@ -26,6 +26,7 @@ def monsterMove():
                         ni,nj = i+dx[nd], j+dy[nd]
                         if cnt ==8:
                             cantgo = True
+                            break
                         if 0<=ni<4 and 0<=nj<4 and not dead[ni][nj] and [ni,nj] != packman:
                             break
                         nd = (nd+1)%8
