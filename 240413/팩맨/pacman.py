@@ -67,6 +67,15 @@ def packmanMove():
             dead[pi][pj] = 3
     packman[0], packman[1] = pi, pj
 
+for turn in range(1,t+1):
+    orgmonster = copy.deepcopy(mboard)
+    mboard = monsterMove()
+    packmanMove()
+    for i in range(4):
+        for j in range(4):
+            if dead[i][j] > 0:
+                dead[i][j] -= 1
+            mboard[i][j] += orgmonster[i][j]
 ans = 0
 for i in range(4):
     for j in range(4):
