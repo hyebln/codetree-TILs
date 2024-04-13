@@ -37,8 +37,8 @@ def monsterMove():
     return newboard
 
 def packmanMove():
-    dx = [-1,1,0,0]
-    dy = [0,0,-1,1]
+    dx = [-1,0,1,0]
+    dy = [0,-1,0,1]
     moveloc = []
     maxeat = -1
     for d1 in range(4):
@@ -51,30 +51,21 @@ def packmanMove():
                 for _ in range(3):
                     pi += dx[dlist[_]]
                     pj += dy[dlist[_]]
-                    if pi <0 or pi>=4 or pj<0 or pj>=4 or [pi,pj] in visited:
+                    if pi <0 or pi>=4 or pj<0 or pj>=4:
                         break
-                    if mboard[pi][pj]:
+                    if [pi,pj] not in visited:
                         eat += len(mboard[pi][pj])
-                        visited.append([pi,pj])
-                if maxeat < eat:
+                    visited.append([pi, pj])
+                    
+                if maxeat < eat and len(visited)==3:
                     moveloc = visited
                     maxeat = eat
-
+                    
     for pi,pj in moveloc:
         if mboard[pi][pj]:
             mboard[pi][pj] = []
             dead[pi][pj] = 3
     packman[0], packman[1] = pi, pj
-
-for turn in range(1,t+1):
-    orgmonster = copy.deepcopy(mboard)
-    mboard = monsterMove()
-    packmanMove()
-    for i in range(4):
-        for j in range(4):
-            if dead[i][j] > 0:
-                dead[i][j] -= 1
-            mboard[i][j] += orgmonster[i][j]
 
 ans = 0
 for i in range(4):
